@@ -1,0 +1,60 @@
+agentLanguage: Java
+agentType: APM
+title: Monitor your java app
+description: New Relic supports the most popular Java app servers, frameworks, virtual machines, and tools. Once installed, the APM agent monitors your app’s performance and gives you insight into that performance. Want more context? See our intro to APM.
+## populates dropdown of app info part of page
+configOptions: 
+  - type: deployment
+    label: 'Where is your app deployed?'
+    options: 
+      - value: 'applicationServer'
+        displayName: 'on an application server'
+        recommendGuided: true
+      - value: 'maven'
+        displayName: 'built with Maven'
+      - value: 'docker'
+        displayName: 'in a Docker Container'
+  - type: framework
+    label: 'What framework are you using?'
+    options: 
+      - value: 'tomcat'
+        displayName: 'Tomcat'
+      - folderName: 'jetty'
+        displayName: 'Jetty'
+## order will dictate the step number 
+steps: 
+  - file: 'intro.mdx'
+  - file: 'appInfo.mdx'
+  - file: 'download/default.mdx'
+    overrides: 
+      - type: 'deployment'
+        overrideConfig: 
+        - value: 'applicationServer'
+          file: 'download/applicationServer.mdx'
+          overrides: 
+            - type: 'framework'
+              overrideConfig: 
+                - value: 'tomcat'
+                  skip: true
+        - value: 'docker'
+          file: 'download/docker.mdx'
+    - file: 'agentConfig.mdx'
+      overrides: 
+        - type: 'deployment'
+          overrideConfig: 
+            - value: 'docker'
+              skip: true
+    - file: 'createDirectory.mdx'
+    - file: 'moveFiles.mdx'
+    - file: 'frameworkInstallation'
+      overrides: 
+        - type: 'framework'
+          overrideConfig: 
+            - value: 'tomcat'
+              file: 'frameworkInstallation/tomcat.mdx'
+whatsNextMdx: |
+  Monitor your app data in New Relic and get comfortable with (the user interface)[].
+
+
+
+
